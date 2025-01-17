@@ -94,7 +94,7 @@ def get_vit_attn_backend(support_fa: bool = False) -> _Backend:
                     "so we use xformers backend instead. You can run "
                     "`pip install flash-attn` to use flash-attention backend.")
                 selected_backend = _Backend.XFORMERS
-        elif current_platform.is_cpu() or current_platform.is_rocm():
+        elif current_platform.is_cpu() or current_platform.is_rocm() or current_platform.is_out_of_tree():
             # ROCM doesn't support xformers
             selected_backend = _Backend.TORCH_SDPA
         else:
